@@ -1,12 +1,22 @@
 import attr
+import sys
 import traceback
 
 import typing
-from typing import List, Union, Iterator, Optional, Dict, Callable, Tuple, Any
+from typing import List, Union, Iterator, Optional, Dict, Callable, Tuple, Any, Set
 
 from options import Options
-from parse_instruction import *
-from flow_graph import *
+from parse_instruction import (
+    AsmGlobalSymbol, AsmAddressMode, AsmLiteral,
+    Instruction, Register,
+    Argument, BinOp, Macro
+)
+from flow_graph import (
+    FlowGraph,
+    Function,
+    Node, ReturnNode,
+    build_callgraph
+)
 
 ARGUMENT_REGS = list(map(Register, [
     'a0', 'a1', 'a2', 'a3',
@@ -746,7 +756,7 @@ Statement = Union[
 class RegInfo:
     contents: Dict[Register, Expression] = attr.ib()
     stack_info: StackInfo = attr.ib(repr=False)
-    written_in_block: Set[Register] = attr.ib(default=set)
+    written_in_block: Set[Register] = attr.ib(factory=set)
 
     def __getitem__(self, key: Register) -> Expression:
         if key == Register('zero'):

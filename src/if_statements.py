@@ -1,11 +1,15 @@
-# from contextlib import contextmanager
+import attr
 import queue
 
 import typing
 from typing import List, Union, Iterator, Optional, Dict, Callable, Any, Set
 
 from options import Options
-from flow_graph import *
+from flow_graph import (
+    FlowGraph,
+    Node,
+    BasicNode, ConditionalNode, ReturnNode
+)
 from translate import FunctionInfo, BlockInfo, BinaryOp, Type, simplify_condition
 
 @attr.s

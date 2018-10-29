@@ -5,7 +5,7 @@ import typing
 from typing import List, Union, Iterator, Optional, Dict, Callable, Any
 
 from options import Options
-from parse_instruction import *
+from parse_instruction import Instruction, parse_instruction
 
 @attr.s(frozen=True)
 class Label:

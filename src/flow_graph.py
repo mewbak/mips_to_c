@@ -3,7 +3,10 @@ import attr
 import typing
 from typing import List, Union, Iterator, Optional, Dict, Set, Tuple, Callable, Any
 
-from parse_instruction import *
+from parse_instruction import (
+    AsmLiteral, Instruction, JumpTarget, Register,
+    parse_instruction
+)
 from parse_file import Function, Label
 
 @attr.s(cmp=False)

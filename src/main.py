@@ -1,5 +1,5 @@
-import sys
 import argparse
+import sys
 
 from flow_graph import build_callgraph, visualize_callgraph
 from parse_file import parse_file
